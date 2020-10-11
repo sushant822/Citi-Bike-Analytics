@@ -283,6 +283,9 @@
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
+      <column caption='Percentage Riders' datatype='real' name='[Calculation_411516451192770560]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='(ATTR([bikeid])* SUM([bikeid]))/100' />
+      </column>
       <_.fcp.ObjectModelTableType.true...column caption='city_bile_2020.csv' datatype='table' name='[__tableau_internal_object_id__].[city_bile_2020.csv_73C6C61905F14F89878B3232F3804B29]' role='measure' type='quantitative' />
       <column caption='Bikeid' datatype='integer' name='[bikeid]' role='measure' type='quantitative' />
       <column caption='Birth Year' datatype='integer' name='[birth year]' role='dimension' type='quantitative' />
@@ -341,12 +344,25 @@
             <datasource caption='city_bile_2020' name='federated.0uxyjbq1v54iig163usni0nq8ign' />
           </datasources>
           <datasource-dependencies datasource='federated.0uxyjbq1v54iig163usni0nq8ign'>
+            <_.fcp.ObjectModelTableType.true...column caption='city_bile_2020.csv' datatype='table' name='[__tableau_internal_object_id__].[city_bile_2020.csv_73C6C61905F14F89878B3232F3804B29]' role='measure' type='quantitative' />
+            <column-instance column='[__tableau_internal_object_id__].[city_bile_2020.csv_73C6C61905F14F89878B3232F3804B29]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:city_bile_2020.csv_73C6C61905F14F89878B3232F3804B29:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[stoptime]' derivation='Month' name='[mn:stoptime:ok]' pivot='key' type='ordinal' />
             <column caption='Stoptime' datatype='datetime' name='[stoptime]' role='dimension' type='ordinal' />
-            <column-instance column='[stoptime]' derivation='Year' name='[yr:stoptime:ok]' pivot='key' type='ordinal' />
+            <_.fcp.ObjectModelTableType.false...column caption='city_bile_2020.csv' datatype='integer' name='[__tableau_internal_object_id__].[city_bile_2020.csv_73C6C61905F14F89878B3232F3804B29]' role='measure' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.0uxyjbq1v54iig163usni0nq8ign].[mn:stoptime:ok]'>
+            <groupfilter from='1' function='range' level='[mn:stoptime:ok]' to='8' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0uxyjbq1v54iig163usni0nq8ign].[mn:stoptime:ok]</column>
+          </slices>
           <aggregation value='true' />
         </view>
-        <style />
+        <style>
+          <style-rule element='label'>
+            <format attr='text-format' field='[federated.0uxyjbq1v54iig163usni0nq8ign].[__tableau_internal_object_id__].[cnt:city_bile_2020.csv_73C6C61905F14F89878B3232F3804B29:qk]' value='' />
+          </style-rule>
+        </style>
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
@@ -355,8 +371,8 @@
             <mark class='Automatic' />
           </pane>
         </panes>
-        <rows>[federated.0uxyjbq1v54iig163usni0nq8ign].[yr:stoptime:ok]</rows>
-        <cols />
+        <rows>[federated.0uxyjbq1v54iig163usni0nq8ign].[__tableau_internal_object_id__].[cnt:city_bile_2020.csv_73C6C61905F14F89878B3232F3804B29:qk]</rows>
+        <cols>[federated.0uxyjbq1v54iig163usni0nq8ign].[mn:stoptime:ok]</cols>
       </table>
       <simple-id uuid='{76C8D086-8DA4-4395-ABFA-9D745675E9EE}' />
     </worksheet>
@@ -381,6 +397,12 @@
             <column-instance column='[end station name]' derivation='None' name='[none:end station name:nk]' pivot='key' type='nominal' />
             <column caption='Stoptime' datatype='datetime' name='[stoptime]' role='dimension' type='ordinal' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.0uxyjbq1v54iig163usni0nq8ign].[mn:stoptime:ok]'>
+            <groupfilter from='1' function='range' level='[mn:stoptime:ok]' to='8' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0uxyjbq1v54iig163usni0nq8ign].[mn:stoptime:ok]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style />
@@ -419,6 +441,11 @@
             <card type='title' />
           </strip>
         </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0uxyjbq1v54iig163usni0nq8ign].[mn:stoptime:ok]' type='filter' />
+          </strip>
+        </edge>
       </cards>
       <simple-id uuid='{5021F2A2-3C88-46E5-AFAB-3015672BB001}' />
     </window>
@@ -440,6 +467,11 @@
           </strip>
           <strip size='31'>
             <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0uxyjbq1v54iig163usni0nq8ign].[mn:stoptime:ok]' type='filter' />
           </strip>
         </edge>
       </cards>
